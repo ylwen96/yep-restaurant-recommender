@@ -1,9 +1,12 @@
 const express = require("express");
 const router = express.Router();
+const RestaurantDB = require("../model/restaurantDB");
+
 
 // GET: /restaurants
 router.get("/", (req,res)=>{
-    res.send("restaurants list routes")
+    let db = new RestaurantDB()
+    db.initialize();
 });
 
 module.exports = router;
