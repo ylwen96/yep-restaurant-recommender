@@ -1,12 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const RestaurantDB = require("../model/restaurantDB");
+const db = require("../model/restaurantDB")
 
-
-// GET: /restaurants
-router.get("/", (req,res)=>{
-    let db = new RestaurantDB()
-    db.initialize();
+router.get("/:id", (req, res) => {
+    db.getRestaurantById(req.params.id)
+        .then((resInfo) => {
+            res.status(200).json(resInfo);
+        })
+        .catch(err => {
+            res.status(400).json({ "message": "Resource not found" + err })
+        })
 });
 
 module.exports = router;
