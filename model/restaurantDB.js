@@ -13,7 +13,8 @@ const restaurantSchema = new Schema({
     grades: [{
         date: Date,
         grade: String,
-        score: Number
+        score: Number,
+        comments: String
     }],
     name: String,
     restaurant_id: String
@@ -34,8 +35,8 @@ class RestaurantDB {
                 reject();
             });
             db.once('open', () => {
-                console.log(db.collections); 
-                this.Restaurant = db.model("restaurant", restaurantSchema, "restaurants"); 
+                console.log(db.collections);
+                this.Restaurant = db.model("restaurant", restaurantSchema, "restaurants");
                 console.log("connection established correctly");
                 console.log("this.Restaurant:", this.Restaurant);
                 resolve();
@@ -46,8 +47,29 @@ class RestaurantDB {
         });
     }
 
+    getAllRestaurants(page, perPage, borough) {
+        let findBy = borough ? { borough } : {};
+
+        if (+page && +perPage) {
+            return this.Restaurant.find(findBy).sort({ restaurant_id: +1 }).skip((page - 1) * +perPage).limit(+perPage).exec();
+        }
+        return Promise.reject(new Error('page and perPage query parameters must be present'));
+    }
+
+    getRestaurantByName(page, perPage,name) {
+        if (+page && +perPage) {
+            return this.Restaurant.find({ name: name }).sort({ restaurant_id: +1 }).skip((page - 1) * +perPage).limit(+perPage).exec();
+        }
+        return Promise.reject(new Error('page and perPage query parameters must be present'));
+    }
+
     getRestaurantById(id) {
         return this.Restaurant.findOne({ _id: id }).exec();
+    }
+
+    async updateRestaurantById(data, id) {
+        await this.Restaurant.updateOne({ _id: id }, { $set: data }).exec();
+        return `restaurant ${id} successfully updated`;
     }
 }
 
