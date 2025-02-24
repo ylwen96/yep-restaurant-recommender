@@ -56,7 +56,7 @@ class RestaurantDB {
         return Promise.reject(new Error('page and perPage query parameters must be present'));
     }
 
-    getRestaurantByName(page, perPage,name) {
+    getRestaurantByName(page, perPage, name) {
         if (+page && +perPage) {
             return this.Restaurant.find({ name: name }).sort({ restaurant_id: +1 }).skip((page - 1) * +perPage).limit(+perPage).exec();
         }

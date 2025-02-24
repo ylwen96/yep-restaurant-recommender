@@ -20,8 +20,12 @@
   },
   "homepage": "https://github.com/ylwen96/yep-restaurant-recommender#readme",
   "dependencies": {
+    "bootstrap": "^5.3.3",
     "cors": "^2.8.5",
+    "ejs": "^3.1.10",
     "express": "^4.21.2",
-    "mongoose": "^8.10.1"
+    "leaflet": "^1.9.4",
+    "mongoose": "^8.10.1",
+    "sass": "^1.85.0"
   }
 }
