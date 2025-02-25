@@ -60,7 +60,6 @@ img {
 }
 
 .sidebar {
-    background-color: green;
     width: 20%;
 }
 
@@ -102,4 +101,13 @@ img {
     padding-top: 20px;
     display: flex;
     justify-content: center;
+}
+
+.num-per-page-div{
+    padding: 10%;
+}
+
+.borough-div{
+    padding: 10%;
+
 }
