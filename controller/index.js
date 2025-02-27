@@ -6,7 +6,7 @@ const db = require("../model/restaurantDB")
 router.get("/", (req, res) => {
     db.getAllRestaurants(req.query.page, req.query.perPage, req.query.borough)
         .then((data) => {
-            res.status(200).json(data);
+            res.status(200).render('main', { data: data });
         })
         .catch(err => {
             res.status(400).json(`oops! error found ` + err);
@@ -15,7 +15,7 @@ router.get("/", (req, res) => {
 
 // GET: /restaurants/search?name=name get by restaurant id
 router.get("/search", (req, res) => {
-    db.getRestaurantByName(req.query.page, req.query.perPage,req.query.name)
+    db.getRestaurantByName(req.query.page, req.query.perPage, req.query.name)
         .then((data) => {
             res.status(200).json(data);
         })
@@ -29,7 +29,7 @@ router.get("/search", (req, res) => {
 router.get("/:id", (req, res) => {
     db.getRestaurantById(req.params.id)
         .then((data) => {
-            res.status(200).json(data);
+            res.status(200).render('detail',{data:data});
         })
         .catch(err => {
             res.status(400).json({ "message": "Resource not found" + err })
