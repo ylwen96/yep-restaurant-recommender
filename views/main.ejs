@@ -2,7 +2,7 @@
     <section class="main-container">
         <div class="restaurants-container">
             <div class="sidebar">
-                123
+                <%= perPage %>
             </div>
             <div class="list-div">
                 <div class="list-group">
@@ -32,7 +32,44 @@
                         <% } %>
                 </div>
                 <div class="page-navbar">
-                    123
+                    <div class="page-navbar">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <% let startPage=Math.floor((page - 1) / 10) * 10 + 1; let endPage=startPage + 9; let
+                                    pageNum=parseInt(page) %>
+
+                                    <% if (pageNum> 1) { %>
+                                        <li class="page-item">
+                                            <a class="page-link"
+                                                href="?page=<%= pageNum - 1 %>&perPage=<%= perPage %>&borough=<%= borough %>">Pervious</a>
+                                        </li>
+                                        <% } %>
+
+                                            <% for (let i=startPage; i <=endPage; i++) { %>
+                                                <% if (i===pageNum) { %>
+                                                    <li class="page-item active">
+                                                        <a class="page-link"
+                                                            href="?page=<%= i %>&perPage=<%= perPage %>&borough=<%= borough %>">
+                                                            <%= i %>
+                                                        </a>
+                                                    </li>
+                                                    <% } else { %>
+                                                        <li class="page-item">
+                                                            <a class="page-link"
+                                                                href="?page=<%= i %>&perPage=<%= perPage %>&borough=<%= borough %>">
+                                                                <%= i %>
+                                                            </a>
+                                                        </li>
+                                                        <% } %>
+                                                            <% } %>
+
+                                                                <li class="page-item">
+                                                                    <a class="page-link"
+                                                                        href="?page=<%= pageNum + 1 %>&perPage=<%= perPage %>&borough=<%= borough %>">Next</a>
+                                                                </li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
             </div>
         </div>
