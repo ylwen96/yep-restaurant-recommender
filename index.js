@@ -3,8 +3,17 @@ const cors = require("cors");
 const app = express();
 const { version, author } = require("./package.json");
 const db = require("./model/restaurantDB")
+const path = require('path');   //used to join path
+
+var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 app.use(cors());
+
+app.use(express.static(__dirname + "/public/"));
 
 app.use("/restaurants", require("./controller"));
 
@@ -20,13 +29,7 @@ app.get("/", (req, res) => {
 
 
 app.use((req, res) => {
-    res.status(404).json({
-        status: "error",
-        error: {
-            message: "route not found",
-            code: 404,
-        },
-    });
+    res.status(404).render('404')
 });
 
 const port = parseInt(process.env.PORT || 8080, 10);

@@ -1,0 +1,38 @@
+<%- include('layout/header.ejs') %>
+
+    <section class="detail-main-body">
+        <div>
+            <img class="detail-image" src="./assets/3.jpeg" alt="">
+        </div>
+        <div>
+            <div class="detail-list-item-content">
+                <h5 class="restaurant-item-name">Restaurant Name</h5>
+                <p>Address</p>
+                <p>Borough</p>
+                <p>Cuisine.</p>
+            </div>
+        </div>
+        <div class="detail-grades">
+            grades
+        </div>
+        <div class="detail-comment">
+            <form>
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label"></label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                </div>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Select Grade</option>
+                    <option value="1">A</option>
+                    <option value="2">B</option>
+                    <option value="3">C</option>
+                    <option value="3">D</option>
+                </select>
+                <button type="submit" style="margin-top: 10px;" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        <div class="detail-map">
+            map
+        </div>
+    </section>
+    <%- include('layout/footer.ejs') %>
