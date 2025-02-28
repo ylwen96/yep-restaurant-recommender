@@ -29,7 +29,7 @@ class RestaurantDB {
 
     initialize() {
         return new Promise((resolve, reject) => {
-            
+
             let db = mongoose.createConnection(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
             db.on('error', () => {
@@ -68,9 +68,28 @@ class RestaurantDB {
         return this.Restaurant.findOne({ _id: id }).exec();
     }
 
-    async updateRestaurantById(data, id) {
-        await this.Restaurant.updateOne({ _id: id }, { $set: data }).exec();
-        return `restaurant ${id} successfully updated`;
+    async updateRestaurantById(id, comment, grade) {
+        if (!comment || !grade) {
+            throw new Error("Comment and grade are required.");
+        }
+
+        let newGrade = {
+            date: new Date().toString(),
+            grade: grade,
+            score: 0,
+            comments: comment
+        };
+
+        let result = await this.Restaurant.updateOne(
+            { _id: id },
+            { $push: { grades: newGrade } }
+        );
+
+        if (result.modifiedCount === 0) {
+            throw new Error("Restaurant not found or not updated.");
+        }
+
+        return `Comment added to restaurant ${id} successfully.`;
     }
 }
 

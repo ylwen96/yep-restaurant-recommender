@@ -36,15 +36,21 @@ router.get("/:id", (req, res) => {
         })
 });
 
-// PUT: /restaurants/:id
-router.put("/api/restaurants/:id", (req, res) => {
-    db.updateRestaurantById(req.body, req.params.id)
-        .then(data => {
-            res.status(200).json(data);
-        })
-        .catch(err => {
-            res.status(400).json({ "message": "Resource not found" + err });
-        })
+// PUT: /restaurants/:id/comment
+router.put("/:id/comment", async (req, res) => {
+    let restaurantId = req.params.id;
+    let { comment, grade } = req.body;
+
+    if (!ObjectId.isValid(restaurantId)) {
+        return res.status(400).json({ error: "Invalid restaurant ID." });
+    }
+
+    try {
+        let message = await db.addCommentToRestaurant(restaurantId, comment, grade);
+        res.json({ message });
+    } catch (err) {
+        res.status(500).json({ error: "Database error: " + err.message });
+    }
 });
 
 module.exports = router;

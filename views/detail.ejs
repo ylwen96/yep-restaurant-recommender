@@ -19,14 +19,14 @@
             </div>
         </div>
         <div class="detail-grades">
-            <h5>Grades:</h5>
+            <h5>Comments:</h5>
             <% for(let i=0; i < data.grades.length; i++) { %>
-                <p>Grade: <%= data.grades[i].grade %> - Date: <%= data.grades[i].date %>
+                <p>Comments: <%= data.grades.comment?data.grades.comment:'Delicious!!!!!' %> <br> Grade: <%= data.grades[i].grade %> - Date: <%= data.grades[i].date %>
                 </p>
                 <% } %>
         </div>
         <div class="detail-comment">
-            <form action="/restaurants/<%= data._id %>/comment" method="POST">
+            <form id="commentForm">
                 <div class="mb-3">
                     <label for="commentText" class="form-label">Leave a comment:</label>
                     <textarea class="form-control" id="commentText" name="comment" rows="5"></textarea>
@@ -39,6 +39,7 @@
                     <option value="C">C</option>
                     <option value="D">D</option>
                 </select>
+                <input type="hidden" id="restaurantId" value="<%= data._id %>">
                 <button type="submit" style="margin-top: 10px;" class="btn btn-primary">Submit</button>
             </form>
         </div>
