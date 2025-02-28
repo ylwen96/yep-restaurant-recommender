@@ -4,6 +4,7 @@
         <div>
             <img class="detail-image" src="/assets/<%= Math.floor(Math.random() * 10) + 1 %>.jpeg" alt="">
         </div>
+        <input type="hidden" id="restaurantsData" value='<%- JSON.stringify(data).replace(/'/g, "&apos;") %>'>
         <div>
             <div class="detail-list-item-content">
                 <h5 class="restaurant-item-name">
@@ -44,8 +45,8 @@
                 <button type="submit" style="margin-top: 10px;" class="btn btn-primary">Submit</button>
             </form>
         </div>
-        <div class="detail-map">
-            map
+        <div class="detail-map-container">
+            <div id="detail-map"></div>
         </div>
     </section>
 
