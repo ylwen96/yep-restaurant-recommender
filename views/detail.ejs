@@ -21,7 +21,8 @@
         <div class="detail-grades">
             <h5>Comments:</h5>
             <% for(let i=0; i < data.grades.length; i++) { %>
-                <p>Comments: <%= data.grades.comment?data.grades.comment:'Delicious!!!!!' %> <br> Grade: <%= data.grades[i].grade %> - Date: <%= data.grades[i].date %>
+                <p>Comments: <%= data.grades[i].comments?data.grades[i].comments:'Delicious!!!!!' %> <br> Grade: <%=
+                            data.grades[i].grade %> - Date: <%= data.grades[i].date %>
                 </p>
                 <% } %>
         </div>

@@ -41,14 +41,11 @@ router.put("/:id/comment", async (req, res) => {
     let restaurantId = req.params.id;
     let { comment, grade } = req.body;
 
-    if (!ObjectId.isValid(restaurantId)) {
-        return res.status(400).json({ error: "Invalid restaurant ID." });
-    }
-
     try {
         let message = await db.addCommentToRestaurant(restaurantId, comment, grade);
         res.json({ message });
     } catch (err) {
+        console.log(err)
         res.status(500).json({ error: "Database error: " + err.message });
     }
 });

@@ -1,7 +1,7 @@
 <%- include('layout/header.ejs') %>
     <section class="main-container">
         <div class="restaurants-container">
-            <div class="sidebar">
+            <div class="num-per-page-div sidebar">
                 <form action="/restaurants" method="GET">
                     <p>How many items you want to display?</p>
                     <input type="radio" id="radio1" name="perPage" value="5" <%=perPage==5 ? "checked" : "" %>>

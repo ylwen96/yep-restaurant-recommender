@@ -5,35 +5,35 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("commentForm").addEventListener("submit", function (event) {
+            event.preventDefault();
 
-document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("commentForm").addEventListener("submit", function (event) {
-        event.preventDefault();
+            let comment = document.getElementById("commentText").value.trim();
+            let grade = document.getElementById("gradeSelect").value;
+            let restaurantId = document.getElementById("restaurantId").value;
 
-        let comment = document.getElementById("commentText").value.trim();
-        let grade = document.getElementById("gradeSelect").value;
-        let restaurantId = document.getElementById("restaurantId").value;
+            if (!comment || !grade) {
+                alert("Please enter a comment and select a grade.");
+                return;
+            }
 
-        if (!comment || !grade) {
-            alert("Please enter a comment and select a grade.");
-            return;
-        }
-
-        axios.put(`/restaurants/${restaurantId}/comment`, {
-            comment: comment,
-            grade: grade
-        })
-        .then(response => {
-            alert("Comment added successfully!");
-            location.reload();
-        })
-        .catch(error => {
-            alert("Error: " + (error.response ? error.response.data.error : error.message));
+            axios.put(`/restaurants/${restaurantId}/comment`, {
+                comment: comment,
+                grade: grade
+            })
+                .then(response => {
+                    alert("Comment added successfully!");
+                    location.reload();
+                })
+                .catch(error => {
+                    console.log("Error: " + (error.response ? error.response.data.error : error.message));
+                });
         });
     });
-});
-
-    </script>
+</script>
 <style>
     body {
         font-family: "Roboto", serif;
@@ -141,13 +141,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     .num-per-page-div {
-        padding: 10%;
+        padding-left: 1%;
     }
 
-    .borough-div {
-        padding: 10%;
 
-    }
 
 
 

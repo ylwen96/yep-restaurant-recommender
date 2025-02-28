@@ -68,7 +68,7 @@ class RestaurantDB {
         return this.Restaurant.findOne({ _id: id }).exec();
     }
 
-    async updateRestaurantById(id, comment, grade) {
+    async addCommentToRestaurant(id, comment, grade) {
         if (!comment || !grade) {
             throw new Error("Comment and grade are required.");
         }
