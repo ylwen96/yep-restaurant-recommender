@@ -2,7 +2,22 @@
     <section class="main-container">
         <div class="restaurants-container">
             <div class="sidebar">
-                <%= perPage %>
+                <form action="/restaurants" method="GET">
+                    <p>How many items you want to display?</p>
+                    <input type="radio" id="radio1" name="perPage" value="5" <%=perPage==5 ? "checked" : "" %>>
+                    <label for="radio1">5</label><br>
+                    <input type="radio" id="radio2" name="perPage" value="10" <%=perPage==10 ? "checked" : "" %>>
+                    <label for="radio2">10</label><br>
+                    <input type="radio" id="radio3" name="perPage" value="20" <%=perPage==20 ? "checked" : "" %>>
+                    <label for="radio3">20</label><br>
+                    <hr>
+                    <input type="text" id="boroughSearch" name="borough" placeholder="borough"
+                        value="<%= borough || '' %>">
+                    <label for="boroughSearch">Borough</label>
+                    <br><br>
+                    <input type="hidden" name="page" value="<%= page %>">
+                    <input type="submit" value="Submit">
+                </form>
             </div>
             <div class="list-div">
                 <div class="list-group">
