@@ -29,6 +29,7 @@ class RestaurantDB {
 
     initialize() {
         return new Promise((resolve, reject) => {
+            
             let db = mongoose.createConnection(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
             db.on('error', () => {
