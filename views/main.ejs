@@ -21,30 +21,36 @@
             </div>
             <div class="list-div">
                 <div class="list-group">
-                    <% for(let i=0; i < data.length; i++) { %>
-                        <a href="/restaurants/<%= data[i]._id %>" class="list-group-item list-group-item-action">
-                            <div class="restaurant-item">
-                                <img class="list-item-img" src="/assets/<%= Math.floor(Math.random() * 10) + 1 %>.jpeg"
-                                    alt="">
-                                <div class="list-item-content">
-                                    <h5 class="restaurant-item-name">
-                                        <%= data[i].name %>
-                                    </h5>
-                                    <p>
-                                        <%= data[i].address.building %>
-                                            <%= data[i].address.street %>
-                                                <%= data[i].address.zipcode %>
-                                    </p>
-                                    <p>
-                                        <%= data[i].borough %>
-                                    </p>
-                                    <p>
-                                        <%= data[i].cuisine %>
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                        <% } %>
+                    <% if (!data || data.length===0) { %>
+                        <div>No results found</div>
+                        <% } else { %>
+                            <% for(let i=0; i < data.length; i++) { %>
+                                <a href="/restaurants/<%= data[i]._id %>"
+                                    class="list-group-item list-group-item-action">
+                                    <div class="restaurant-item">
+                                        <img class="list-item-img"
+                                            src="/assets/<%= Math.floor(Math.random() * 10) + 1 %>.jpeg" alt="">
+                                        <div class="list-item-content">
+                                            <h5 class="restaurant-item-name">
+                                                <%= data[i].name %>
+                                            </h5>
+                                            <p>
+                                                <%= data[i].address.building %>
+                                                    <%= data[i].address.street %>
+                                                        <%= data[i].address.zipcode %>
+                                            </p>
+                                            <p>
+                                                <%= data[i].borough %>
+                                            </p>
+                                            <p>
+                                                <%= data[i].cuisine %>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <% } %>
+                                    <% } %>
+
                 </div>
                 <div class="page-navbar">
                     <div class="page-navbar">
