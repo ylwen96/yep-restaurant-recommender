@@ -19,6 +19,10 @@ app.use(express.static(__dirname + "/public/"));
 app.use("/restaurants", require("./controller"));
 
 app.get("/", (req, res) => {
+    res.redirect('/restaurants?page=1&perPage=10&borough=')
+});
+
+app.get("/api", (req, res) => {
     res.setHeader("Cache-Control", "no-cache");
     res.status(200).json({
         status: "ok",
