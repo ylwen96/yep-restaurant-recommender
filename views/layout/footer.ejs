@@ -47,8 +47,6 @@
         let detailMapElement = document.getElementById("detail-map");
         if (detailMapElement) {
             let restaurantsData = JSON.parse(document.getElementById("restaurantsData").value);
-            console.log(restaurantsData)
-
             var detailMap = L.map('detail-map').setView([restaurantsData.address.coord[1], restaurantsData.address.coord[0]], 12);
 
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {

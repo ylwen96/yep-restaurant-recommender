@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const db = require("../model/restaurantDB")
+const db = require("../model/restaurantDB");
+const { createErrorResponse } = require("../util/response");
 
 // GET: /restaurants get restaurants
 router.get("/", (req, res) => {
@@ -9,7 +10,7 @@ router.get("/", (req, res) => {
             res.status(200).render('main', { data: data, page: req.query.page, perPage: req.query.perPage, borough: req.query.borough });
         })
         .catch(err => {
-            res.status(400).json(`oops! error found ` + err);
+            res.status(400).json(createErrorResponse(400, err))
         })
 });
 
@@ -20,7 +21,8 @@ router.get("/:id", (req, res) => {
             res.status(200).render('detail', { data: data });
         })
         .catch(err => {
-            res.status(400).json({ "message": "Resource not found" + err })
+            res.status(404).json(createErrorResponse(404, err))
+
         })
 });
 
@@ -33,8 +35,7 @@ router.put("/:id/comment", async (req, res) => {
         let message = await db.addCommentToRestaurant(restaurantId, comment, grade);
         res.json({ message });
     } catch (err) {
-        console.log(err)
-        res.status(500).json({ error: "Database error: " + err.message });
+        res.status(500).json(createErrorResponse(500, err))
     }
 });
 

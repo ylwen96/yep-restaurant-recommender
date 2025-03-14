@@ -24,10 +24,6 @@
                     <% if (!data || data.length===0) { %>
                         <div>No results found</div>
                         <% } else { %>
-                            <!-- convert javascript data format to JSON format
-                            { address: { coord: [ -73.856077, 40.848447 ] } } 
-                            to
-                            { "address": { "coord": [ -73.856077, 40.848447 ] } } -->
                             <input type="hidden" id="restaurantsData" value='<%- JSON.stringify(data).replace(/'/g, "&apos;") %>'>
                             <% for(let i=0; i < data.length; i++) { %>
                                 <a href="/restaurants/<%= data[i]._id %>"

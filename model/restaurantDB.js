@@ -36,10 +36,8 @@ class RestaurantDB {
                 reject();
             });
             db.once('open', () => {
-                console.log(db.collections);
                 this.Restaurant = db.model("restaurant", restaurantSchema, "restaurants");
                 console.log("connection established correctly");
-                console.log("this.Restaurant:", this.Restaurant);
                 resolve();
             });
             db.on('disconnected', () => {
